@@ -128,3 +128,29 @@ def logout_user(request):
 	if request.method == 'POST':
 		logout(request)
 		return redirect('user_app:signin')
+
+@login_required
+def sign_up_step_two(request):
+	profile = Profile.objects.get(pk=request.user.pk)
+	if profile.first_name and profile.last_name and profile.age:
+		if request.method == 'POST':
+			step_two_form = SignUpStepTwoForm(request.POST,
+										request.FILES,
+										instance=request.user.profile)
+			if not(request.POST['city']):
+				return render(request, 'user_app/sign_up_step_two.html', {'error': 'Location can\'t be empty'})
+			elif request.POST['sex'] not in ['M', 'F']:
+					return render(request, 'user_app/sign_up_step_two.html', {'error': 'Choose correct sex field'})
+			elif request.POST['seeking'] not in ['M', 'F']:
+					return render(request, 'user_app/sign_up_step_two.html', {'error': 'Choose correct seeking field'})
+			else:
+				step_two_form.save()
+				return redirect('user_app:sign_up_step_three')
+		else:
+			step_two_form = SignUpStepTwoForm(instance=request.user.profile)
+
+		context = {
+			'step_two_form': step_two_form,
+		}
+		return render(request, 'user_app/sign_up_step_two.html', context)
+	return redirect('user_app:sign_up_step_one')

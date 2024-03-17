@@ -9,6 +9,10 @@ class SignUpStepOneForm(forms.ModelForm):
         model = Profile
         fields = ['first_name', 'last_name', 'age']
 
+class SignUpStepTwoForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['city', 'sex', 'seeking']
 
 class SignUpStepThreeForm(forms.ModelForm):
     class Meta:
