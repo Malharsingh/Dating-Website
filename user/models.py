@@ -1,18 +1,19 @@
-from django.db import models
-from django.contrib.auth.models import User
 from PIL import Image
+from django.contrib.auth.models import User
+from django.db import models
+
 from .validators import validate_file_size
 
 
 def user_directory_path(instance, filename):
-    # Файлы загрузятся в MEDIA_ROOT/user_images/username/<filename>
+    # The files will be uploaded to MEDIA_ROOT/user_images/username/<filename>
     return 'user_images/{0}/{1}'.format(instance.user.username, filename)
 
 
 class Profile(models.Model):
     class SexOptions(models.TextChoices):
-        MALE = 'M', ('Male')
-        FEMALE = 'F', ('Female')
+        MALE = 'M', 'Male'
+        FEMALE = 'F', 'Female'
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20, null=True, blank=True)
