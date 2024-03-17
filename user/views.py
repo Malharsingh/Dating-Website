@@ -154,3 +154,37 @@ def sign_up_step_two(request):
 		}
 		return render(request, 'user_app/sign_up_step_two.html', context)
 	return redirect('user_app:sign_up_step_one')
+
+
+def signup(request):
+	"""Регистрация пользователя"""
+	if request.user.is_authenticated: # Если пользователь в системе, то у него нет доступа к форме входа
+		return redirect('dating_app:dating')
+	else:
+		error_contex = []
+		if request.method == 'GET':
+			return render(request, 'user_app/sign_up.html', {'form': UserCreationForm})
+		else:
+			if not(request.POST['username']):
+				error_contex.append('Login can\'t be empty')
+			elif not(request.POST['password1']):
+				error_contex.append('Password can\'t be empty')
+			elif not(request.POST['password2']):
+				error_contex.append('Confirm Password can\'t be empty')
+			elif request.POST['password1'] != request.POST['password2']:
+				error_contex.append('Password did not match')
+			elif len(request.POST['password1']) < 8:
+				error_contex.append('Password less then 8 characters')
+			elif str(request.POST['username']).lower() in ['admin', 'админ', 'аdmin', 'god', 'administrator', 'аdministrator', 'аdministrаtor']:
+				error_contex.append('This login can\'t be taken')
+			else:
+				try:
+					user = User.objects.create_user(username = request.POST['username'], password=request.POST['password1'])
+					user.save()
+					login(request, user)
+					return redirect('user_app:sign_up_step_one')
+				except IntegrityError:
+					error_contex.append('That username has already been taken')
+					return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})
+			return render(request, 'user_app/sign_up.html', {'form': UserCreationForm(), 'error_contex': error_contex})
+
