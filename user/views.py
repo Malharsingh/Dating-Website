@@ -40,7 +40,7 @@ def signup_one(request):
 def user_account(request):
     profile = Profile.objects.get(pk=request.user.pk)
     if profile.about:
-        """Personal user account where he can edit user data"""
+        
         if request.method == 'POST':
             u_form = UserUpdateForm(request.POST, instance=request.user)
             p_form = ProfileUpdateForm(request.POST,
@@ -55,7 +55,7 @@ def user_account(request):
                 try:
                     u_form.save()
                     p_form.save()
-                    return redirect('user_app:user_account')  # Перенаправление на страницу профиля пользователя
+                    return redirect('user_app:user_account') 
                 except ValueError:
                     return render(request, 'user/user_account.html',
                                   {'error': 'Files is too large, requirement is less than 2.5 MB'})
@@ -76,8 +76,8 @@ def user_account(request):
 
 
 def signin(request):
-    """Вход пользователя"""
-    if request.user.is_authenticated:  # Если пользователь в системе, то у него нет доступа к форме входа
+    
+    if request.user.is_authenticated: 
         return redirect('dating_app:dating')
     else:
         if request.method == 'GET':
