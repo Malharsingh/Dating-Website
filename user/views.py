@@ -121,3 +121,10 @@ def sign_up_step_three(request):
         }
         return render(request, 'user/sign_up_step_three.html', context)
     return redirect('user_app:sign_up_step_two')
+
+
+@login_required
+def logout_user(request):
+	if request.method == 'POST':
+		logout(request)
+		return redirect('user_app:signin')
