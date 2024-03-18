@@ -1,5 +1,5 @@
-{% extends "dating_app/base.html" %}
-{% load crispy_forms_tags %}
+{% extends "userapp/base.html" %}
+{% load crispy_forms_filters %}
 {% load i18n %}
 {% load static %}
 
@@ -27,7 +27,7 @@
 				  <textarea class="form-control" name="about" cols="40" rows="10" style="width: 100%; margin-top: 20px; margin-bottom: 20px;" id="id_about" placeholder="{% trans 'About you' %}"></textarea>
 		<!-- {{ step_three_form|crispy }} -->
         <div class="form-footer d-flex">
-			<a href="{% url 'user_app:sign_up_step_two' %}" class="previous">{% trans 'Previous' %}</a>
+			<a href="{% url 'userapp:sign_up_step_two' %}" class="previous">{% trans 'Previous' %}</a>
             <button type="submit">{% trans 'Done' %}</button>
         </div>
     </form>

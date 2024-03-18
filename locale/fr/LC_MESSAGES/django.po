@@ -1,0 +1,260 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-17 20:48-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\frendate\settings.py:119
+msgid "English"
+msgstr "Anglais"
+
+#: .\frendate\settings.py:120
+msgid "French"
+msgstr ""
+
+#: .\userapp\templates\userapp\base.html:57
+msgid "Signed in as"
+msgstr "Connecté en tant que"
+
+#: .\userapp\templates\userapp\base.html:63
+msgid "Profile"
+msgstr "Profil"
+
+#: .\userapp\templates\userapp\base.html:68
+msgid "Favorites"
+msgstr "Favoris"
+
+#: .\userapp\templates\userapp\base.html:75
+msgid "Sign out"
+msgstr "Déconnexion"
+
+#: .\userapp\templates\userapp\sign_in.html:39
+msgid "Enter the information you entered while registering."
+msgstr "Entrez les informations que vous avez fournies lors de l'inscription."
+
+#: .\userapp\templates\userapp\sign_in.html:54
+#: .\userapp\templates\userapp\sign_up.html:62
+msgid "Sign In"
+msgstr "Se connecter"
+
+#: .\userapp\templates\userapp\sign_in.html:56
+msgid "Don't have an account?"
+msgstr "Vous n'avez pas de compte ?"
+
+#: .\userapp\templates\userapp\sign_in.html:57
+#: .\userapp\templates\userapp\sign_up.html:59
+msgid "Sign Up"
+msgstr "S'inscrire"
+
+#: .\userapp\templates\userapp\sign_up.html:38
+msgid "It's Never too late<br>to Find Match"
+msgstr "Il n'est jamais trop tard pour trouver une correspondance"
+
+#: .\userapp\templates\userapp\sign_up.html:49
+msgid "Login"
+msgstr "Nom d'utilisateur"
+
+#: .\userapp\templates\userapp\sign_up.html:53
+msgid "Password"
+msgstr "Mot de passe"
+
+#: .\userapp\templates\userapp\sign_up.html:56
+msgid "Confirm Password"
+msgstr "Confirmer le mot de passe"
+
+#: .\userapp\templates\userapp\sign_up.html:61
+msgid "Have an account?"
+msgstr "Vous avez un compte ?"
+
+#: .\userapp\templates\userapp\sign_up_step_one.html:20
+#: .\userapp\templates\userapp\sign_up_step_three.html:20
+#: .\userapp\templates\userapp\sign_up_step_two.html:20
+msgid "STEP"
+msgstr "ÉTAPE"
+
+#: .\userapp\templates\userapp\sign_up_step_one.html:25
+#: .\userapp\templates\userapp\user_account.html:39
+msgid "First name"
+msgstr "Prénom"
+
+#: .\userapp\templates\userapp\sign_up_step_one.html:32
+#: .\userapp\templates\userapp\user_account.html:43
+msgid "Last name"
+msgstr "Nom de famille"
+
+#: .\userapp\templates\userapp\sign_up_step_one.html:39
+#: .\userapp\templates\userapp\user_account.html:55
+msgid "Age"
+msgstr "Âge"
+
+#: .\userapp\templates\userapp\sign_up_step_one.html:43
+#: .\userapp\templates\userapp\sign_up_step_two.html:58
+msgid "Next"
+msgstr "Suivant"
+
+#: .\userapp\templates\userapp\sign_up_step_three.html:27
+msgid "About you"
+msgstr "À propos de vous"
+
+#: .\userapp\templates\userapp\sign_up_step_three.html:30
+#: .\userapp\templates\userapp\sign_up_step_two.html:57
+msgid "Previous"
+msgstr "Précédent"
+
+#: .\userapp\templates\userapp\sign_up_step_three.html:31
+msgid "Done"
+msgstr "Terminé"
+
+#: .\userapp\templates\userapp\sign_up_step_two.html:25
+msgid "Your country and city"
+msgstr "Votre pays et votre ville"
+
+#: .\userapp\templates\userapp\sign_up_step_two.html:30
+msgid "I'm a"
+msgstr "Je suis"
+
+#: .\userapp\templates\userapp\sign_up_step_two.html:34
+#: .\userapp\templates\userapp\sign_up_step_two.html:37
+#: .\userapp\templates\userapp\sign_up_step_two.html:48
+#: .\userapp\templates\userapp\sign_up_step_two.html:51
+#: .\userapp\templates\userapp\user_account.html:67
+#: .\userapp\templates\userapp\user_account.html:72
+#: .\userapp\templates\userapp\user_account.html:81
+#: .\userapp\templates\userapp\user_account.html:86
+msgid "Male"
+msgstr "Homme"
+
+#: .\userapp\templates\userapp\sign_up_step_two.html:35
+#: .\userapp\templates\userapp\sign_up_step_two.html:38
+#: .\userapp\templates\userapp\sign_up_step_two.html:49
+#: .\userapp\templates\userapp\sign_up_step_two.html:52
+#: .\userapp\templates\userapp\user_account.html:68
+#: .\userapp\templates\userapp\user_account.html:73
+#: .\userapp\templates\userapp\user_account.html:82
+#: .\userapp\templates\userapp\user_account.html:87
+msgid "Female"
+msgstr "Femme"
+
+#: .\userapp\templates\userapp\sign_up_step_two.html:44
+msgid "Seeking a"
+msgstr "Je recherche un/une"
+
+#: .\userapp\templates\userapp\user_account.html:13
+msgid "Media"
+msgstr "Média"
+
+#: .\userapp\templates\userapp\user_account.html:23
+msgid "Wrapper"
+msgstr "Emballage"
+
+#: .\userapp\templates\userapp\user_account.html:28
+msgid "Picture"
+msgstr "Image"
+
+#: .\userapp\templates\userapp\user_account.html:35
+msgid "Information"
+msgstr "Informations"
+
+#: .\userapp\templates\userapp\user_account.html:48
+msgid "Username"
+msgstr "Nom d'utilisateur"
+
+#: .\userapp\templates\userapp\user_account.html:59
+msgid "Location"
+msgstr "Emplacement"
+
+#: .\userapp\templates\userapp\user_account.html:64
+msgid "Sex"
+msgstr "Sexe"
+
+#: .\userapp\templates\userapp\user_account.html:78
+msgid "Seeking"
+msgstr "Recherche"
+
+#: .\userapp\templates\userapp\user_account.html:93
+msgid "About Me"
+msgstr "À propos de moi"
+
+#: .\userapp\templates\userapp\user_account.html:97
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#~ msgid "Select a chat to start messaging"
+#~ msgstr "Sélectionnez un chat pour commencer à envoyer des messages"
+
+#~ msgid "Your chat is empty"
+#~ msgstr "Votre discussion est vide"
+
+#~ msgid "Chatting"
+#~ msgstr "En conversation"
+
+#~ msgid "Delete"
+#~ msgstr "Supprimer"
+
+#~ msgid "You haven't favorites"
+#~ msgstr "Vous n'avez pas de favoris"
+
+#~ msgid "Chat Now"
+#~ msgstr "Discuter maintenant"
+
+#~ msgid "Photos (Coming soon)"
+#~ msgstr "Photos (Bientôt disponible)"
+
+#~ msgid "Interests"
+#~ msgstr "Intérêts"
+
+#~ msgid "Coming soon"
+#~ msgstr "Bientôt disponible"
+
+#~ msgid "Match Predictor"
+#~ msgstr "Prédiction de compatibilité"
+
+#~ msgid "About"
+#~ msgstr "À propos de"
+
+#~ msgid "Physical Details"
+#~ msgstr "Détails physiques"
+
+#~ msgid "I'm looking for"
+#~ msgstr "Je recherche"
+
+#~ msgid "Current Goal"
+#~ msgstr "Objectif actuel"
+
+#~ msgid "Similar Users (coming soon)"
+#~ msgstr "Utilisateurs similaires (Bientôt disponible)"
+
+#~ msgid "Search..."
+#~ msgstr "Recherche..."
+
+#~ msgid "All"
+#~ msgstr "Tout"
+
+#~ msgid "Boys"
+#~ msgstr "Garçons"
+
+#~ msgid "Girls"
+#~ msgstr "Filles"
+
+#~ msgid "All boys"
+#~ msgstr "Tous les garçons"
+
+#~ msgid "All girls"
+#~ msgstr "Toutes les filles"
+
+#~ msgid "All users"
+#~ msgstr "Tous les utilisateurs"

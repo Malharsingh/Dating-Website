@@ -1,13 +1,12 @@
-from PIL import Image
-from django.contrib.auth.models import User
 from django.db import models
-
+from django.contrib.auth.models import User
+from PIL import Image
 from .validators import validate_file_size
 
 
 def user_directory_path(instance, filename):
     # The files will be uploaded to MEDIA_ROOT/user_images/username/<filename>
-    return 'user_images/{0}/{1}'.format(instance.user.username, filename)
+    return f'user_images/{instance.user.username}/{filename}'
 
 
 class Profile(models.Model):
