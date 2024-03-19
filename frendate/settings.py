@@ -39,10 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Apps
-    'userapp.apps.UserConfig',
+    'userapp.apps.UserAppConfig',
     'crispy_forms',
     "crispy_bootstrap5",
-    "datingapp.apps.DatingappConfig"
+    "datingapp.apps.DatingAppConfig"
 ]
 
 MIDDLEWARE = [
