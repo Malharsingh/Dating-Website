@@ -1,6 +1,7 @@
-from django.db.models.signals import post_save  # Imports the post_save signal when creating a user
 from django.contrib.auth.models import User  # Imports the built-in User model, which is the sender
+from django.db.models.signals import post_save  # Imports the post_save signal when creating a user
 from django.dispatch import receiver  # Import receiver
+
 from .models import Profile  # Profile model
 
 
