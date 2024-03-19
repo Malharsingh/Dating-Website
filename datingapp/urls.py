@@ -6,5 +6,6 @@ app_name = 'dating_app'
 
 urlpatterns = [
     path('random_card/', views.random_card, name='random_card'),
+    path('<int:user_id>/', views.partner_account, name='partner_account'),
 
 ]

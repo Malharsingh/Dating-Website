@@ -1,9 +1,20 @@
 import random
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from userapp.models import Profile
+
+@login_required
+def partner_account(request, user_id):
+    profile = Profile.objects.get(pk=request.user.pk)
+    if profile.about:
+        """Show profile details of other users"""
+        partner_account = get_object_or_404(User, pk=user_id)
+        return render(request, 'dating_app/partner_account.html', {'partner_account': partner_account,
+                                                                   'favorites': Favorite.objects.filter(
+                                                                       user=request.user).order_by('-saved_date')})
+    return redirect('user_app:sign_up_step_three')
 
 
 # Create your views here.
