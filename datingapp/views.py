@@ -1,6 +1,7 @@
+import random
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 
 from userapp.models import Profile
 
@@ -33,3 +34,20 @@ def get_pagination(request, profiles_list, objects_num):
         'page_range': page_range
     }
     return context
+
+
+def random_card(request):
+    profile = Profile.objects.get(pk=request.user.pk)
+    card_list = list(Profile.objects.filter(sex__in=str(profile.seeking)
+                                            ).exclude(id=request.user.id))
+    if card_list:
+        random_card = random.sample(card_list, 1)
+    else:
+        random_card = None
+    return render(request, 'dating_app/random_card.html', {'random_card': random_card,
+                                                           'favorites': Favorite.objects.filter(
+                                                               user=request.user).order_by('-saved_date')})
+
+
+
+
