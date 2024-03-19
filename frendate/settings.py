@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'userapp.apps.UserConfig',
     'crispy_forms',
     "crispy_bootstrap5",
+    "datingapp.apps.DatingappConfig"
 ]
 
 MIDDLEWARE = [
