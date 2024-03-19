@@ -12,7 +12,6 @@ urlpatterns = [
     path('signup/step_one/', views.sign_up_step_one, name='sign_up_step_one'),
     path('signup/step_two/', views.sign_up_step_two, name='sign_up_step_two'),
     path('signup/step_three/', views.sign_up_step_three, name='sign_up_step_three'),
-    path('', views.home, name='home'),
 
     # User pages
     path('user_account/', views.user_account, name='user_account'),

@@ -10,16 +10,10 @@ from .forms import UserUpdateForm, ProfileUpdateForm, SignUpStepOneForm, SignUpS
 from .models import Profile
 
 
-@login_required
-def home(request):
-    if request.user.is_authenticated:
-        return render(request, template_name='userapp/home.html', context={'user': request.user})
-
-
 def signup(request):
     """User registration"""
     if request.user.is_authenticated:  # If the user is logged in, then he does not have access to the login form
-        return redirect('userapp:home')
+        return redirect('datingapp:dating')
     else:
         error_context = []
         if request.method == 'GET':
@@ -56,7 +50,7 @@ def signup(request):
 def signin(request):
     """User Login"""
     if request.user.is_authenticated:  # If the user is logged in, then he does not have access to the login form
-        return redirect('userapp:home')
+        return redirect('datingapp:dating')
     else:
         if request.method == 'GET':
             return render(request, template_name='userapp/sign_in.html',
@@ -70,7 +64,7 @@ def signin(request):
                                        'error_signin': 'Username or password did not match'})
             else:
                 login(request, user)
-                return redirect('userapp:home')
+                return redirect('datingapp:dating')
 
 
 @login_required
@@ -113,7 +107,7 @@ def user_account(request):
         context = {
             'u_form': u_form,
             'p_form': p_form,
-            # 'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')
+            'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')
         }
 
         return render(request, template_name='userapp/user_account.html', context=context)
@@ -204,7 +198,7 @@ def sign_up_step_three(request):
             else:
                 try:
                     step_three_form.save()
-                    return redirect('userapp:user_account')
+                    return redirect('datingapp:dating')
                 except ValueError:
                     return render(request, template_name='userapp/sign_up_step_three.html',
                                   context={'error': 'File is too large, requirement is less than 2.5 MB'})
