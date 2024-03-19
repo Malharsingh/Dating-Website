@@ -1,8 +1,8 @@
-from django.urls import path, include
-from . import views
-from django.conf.urls.i18n import i18n_patterns
+from django.urls import path
 
-app_name = 'dating_app'
+from . import views
+
+app_name = 'datingapp'
 
 urlpatterns = [
     path('random_card/', views.random_card, name='random_card'),

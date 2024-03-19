@@ -20,11 +20,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from datingapp import views
+
 urlpatterns = [
                   path('admin/', admin.site.urls),
               ] + i18n_patterns(
     path('i18n/', include('django.conf.urls.i18n')),
+    path('', views.home, name='home'),
     path('', include('userapp.urls')),
+    path('dating/', include('datingapp.urls'))
 )
 
 if settings.DEBUG:
