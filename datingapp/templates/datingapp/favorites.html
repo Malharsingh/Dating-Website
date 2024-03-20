@@ -13,7 +13,7 @@
 			{% if favorites %}
 			{% for favorite in favorites %}
 			<div class="list-group w-auto">
-				<a href="{% url 'dating_app:partner_account' favorite.saved.id %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+				<a href="{% url 'datingapp:partner_account' favorite.saved.id %}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
 				  <img src="{{ favorite.saved.profile.profile_pic.url }}"style="width: 40px; height: 40px; object-fit: cover; object-position: center;" class="rounded-circle flex-shrink-0">
 				  <div class="d-flex gap-2 w-100 justify-content-between">
 					<div>
@@ -27,10 +27,10 @@
 				  </div>
 				</a>
 			<div class="d-flex">
-			<a href="{% url 'chat_app:inbox' favorite.saved %}" class="btn btn-success flex-fill"><svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="16" height="16" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16">
+			<a href="{% url 'chatapp:inbox' favorite.saved %}" class="btn btn-success flex-fill"><svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="16" height="16" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16">
 				<path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z"/>
 			  </svg> {% trans 'Chatting' %}</a>
-			<a href="{% url 'dating_app:favorite_add' favorite.saved.id %}" class="btn btn-danger flex-fill"><svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+			<a href="{% url 'datingapp:favorite_add' favorite.saved.id %}" class="btn btn-danger flex-fill"><svg xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
 				<path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
 			  </svg> {% trans 'Delete' %}</a>
 			</div>

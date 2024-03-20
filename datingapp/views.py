@@ -33,7 +33,7 @@ def dating(request):
         else:
             context.update({'query': f'There are no people with name "{query}"'})
         return render(request, 'datingapp/dating.html', context)
-    return redirect('user_app:sign_up_step_three')
+    return redirect('userapp:sign_up_step_three')
 
 
 def favorite_add(request, user_id):
@@ -57,7 +57,7 @@ def partner_account(request, user_id):
         return render(request, 'datingapp/partner_account.html', {'partner_account': partner_account,
                                                                   'favorites': Favorite.objects.filter(
                                                                       user=request.user).order_by('-saved_date')})
-    return redirect('user_app:sign_up_step_three')
+    return redirect('userapp:sign_up_step_three')
 
 
 # Create your views here.
@@ -65,8 +65,8 @@ def partner_account(request, user_id):
 def home(request):
     profile = Profile.objects.get(pk=request.user.pk)
     if profile.about:
-        return redirect('dating_app:dating')
-    return redirect('user_app:sign_up_step_three')
+        return redirect('datingapp:dating')
+    return redirect('userapp:sign_up_step_three')
 
 
 def get_pagination(request, profiles_list, objects_num):
