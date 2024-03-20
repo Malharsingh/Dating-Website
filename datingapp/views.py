@@ -1,7 +1,10 @@
 import random
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Favorite
 from userapp.models import Profile
@@ -28,7 +31,7 @@ def dating(request):
             context.update({'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')})
         else:
             context.update({'query': f'There are no people with name "{query}"'})
-        return render(request, 'dating_app/dating.html', context)
+        return render(request, 'datingapp/dating.html', context)
     return redirect('user_app:sign_up_step_three')
 
 
@@ -50,7 +53,7 @@ def partner_account(request, user_id):
     if profile.about:
         """Show profile details of other users"""
         partner_account = get_object_or_404(User, pk=user_id)
-        return render(request, 'dating_app/partner_account.html', {'partner_account': partner_account,
+        return render(request, 'datingapp/partner_account.html', {'partner_account': partner_account,
                                                                    'favorites': Favorite.objects.filter(
                                                                        user=request.user).order_by('-saved_date')})
     return redirect('user_app:sign_up_step_three')
@@ -94,6 +97,6 @@ def random_card(request):
         random_card = random.sample(card_list, 1)
     else:
         random_card = None
-    return render(request, 'dating_app/random_card.html', {'random_card': random_card,
-                                                           'favorites': Favorite.objects.filter(
-                                                               user=request.user).order_by('-saved_date')})
+    return render(request, 'datingapp/random_card.html', {'random_card': random_card,
+                                                          'favorites': Favorite.objects.filter(
+                                                              user=request.user).order_by('-saved_date')})
