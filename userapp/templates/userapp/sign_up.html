@@ -33,7 +33,7 @@
 					<form action="{% url 'userapp:signup' %}" method="POST">
 						{% csrf_token %}
 					<div class="d-flex align-items-center mb-3 pb-1">
-					  <span class="h1 fw-bold mb-0"><img src="{% static 'userapp/frendate_logo.png' %}" style="height: 60px;" alt="Calambug"></span>
+					  <span class="h1 fw-bold mb-0"><img src="{% static 'userapp/logo.png' %}" style="height: 60px;" alt="Calambug"></span>
 					</div>
 					<h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">{% trans "It's Never too late<br>to Find Match" %}</h3>
 					{% if error_context %}
