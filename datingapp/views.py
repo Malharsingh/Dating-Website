@@ -6,8 +6,9 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Favorite
+
 from userapp.models import Profile
+from .models import Favorite
 
 
 @login_required
@@ -54,8 +55,8 @@ def partner_account(request, user_id):
         """Show profile details of other users"""
         partner_account = get_object_or_404(User, pk=user_id)
         return render(request, 'datingapp/partner_account.html', {'partner_account': partner_account,
-                                                                   'favorites': Favorite.objects.filter(
-                                                                       user=request.user).order_by('-saved_date')})
+                                                                  'favorites': Favorite.objects.filter(
+                                                                      user=request.user).order_by('-saved_date')})
     return redirect('user_app:sign_up_step_three')
 
 

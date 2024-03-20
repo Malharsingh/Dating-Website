@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Favorite(models.Model):
@@ -8,4 +8,4 @@ class Favorite(models.Model):
     saved_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'???????????? {self.user} | ???????? {self.saved}'
+        return f'User {self.user} | Saved {self.saved}'
