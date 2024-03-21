@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-17 20:48-0400\n"
+"POT-Creation-Date: 2024-03-20 20:25-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,44 +18,135 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\frendate\settings.py:119
-msgid "English"
-msgstr "Anglais"
-
-#: .\frendate\settings.py:120
-msgid "French"
-msgstr ""
-
-#: .\userapp\templates\userapp\base.html:57
+#: .\datingapp\templates\datingapp\base.html:57
 msgid "Signed in as"
 msgstr "Connecté en tant que"
 
-#: .\userapp\templates\userapp\base.html:63
+#: .\datingapp\templates\datingapp\base.html:63
 msgid "Profile"
 msgstr "Profil"
 
-#: .\userapp\templates\userapp\base.html:68
+#: .\datingapp\templates\datingapp\base.html:68
+#: .\datingapp\templates\datingapp\favorites.html:9
 msgid "Favorites"
 msgstr "Favoris"
 
-#: .\userapp\templates\userapp\base.html:75
+#: .\datingapp\templates\datingapp\base.html:75
 msgid "Sign out"
 msgstr "Déconnexion"
 
-#: .\userapp\templates\userapp\sign_in.html:39
+#: .\datingapp\templates\datingapp\favorites.html:32
+msgid "Chatting"
+msgstr "En conversation"
+
+#: .\datingapp\templates\datingapp\favorites.html:35
+msgid "Delete"
+msgstr "Supprimer"
+
+#: .\datingapp\templates\datingapp\favorites.html:40
+msgid "You haven't favorites"
+msgstr "Vous n'avez pas de favoris"
+
+#: .\datingapp\templates\datingapp\partner_account.html:16
+msgid "Chat Now"
+msgstr "Discuter maintenant"
+
+#: .\datingapp\templates\datingapp\partner_account.html:24
+msgid "Photos (Coming soon)"
+msgstr "Photos (Bientôt disponible)"
+
+#: .\datingapp\templates\datingapp\partner_account.html:44
+msgid "Interests"
+msgstr "Intérêts"
+
+#: .\datingapp\templates\datingapp\partner_account.html:45
+#: .\datingapp\templates\datingapp\partner_account.html:49
+#: .\datingapp\templates\datingapp\partner_account.html:59
+#: .\datingapp\templates\datingapp\partner_account.html:63
+#: .\datingapp\templates\datingapp\partner_account.html:67
+msgid "Coming soon"
+msgstr "Bientôt disponible"
+
+#: .\datingapp\templates\datingapp\partner_account.html:48
+msgid "Match Predictor"
+msgstr "Prédiction de compatibilité"
+
+#: .\datingapp\templates\datingapp\partner_account.html:54
+msgid "About"
+msgstr "À propos de"
+
+#: .\datingapp\templates\datingapp\partner_account.html:58
+msgid "Physical Details"
+msgstr "Détails physiques"
+
+#: .\datingapp\templates\datingapp\partner_account.html:62
+msgid "I'm looking for"
+msgstr "Je recherche"
+
+#: .\datingapp\templates\datingapp\partner_account.html:66
+msgid "Current Goal"
+msgstr "Objectif actuel"
+
+#: .\datingapp\templates\datingapp\partner_account.html:71
+msgid "Similar Users (coming soon)"
+msgstr "Utilisateurs similaires (Bientôt disponible)"
+
+#: .\datingapp\templates\datingapp\search_bar.html:6
+msgid "Search..."
+msgstr "Recherche..."
+
+#: .\datingapp\templates\datingapp\search_bar.html:9
+#: .\datingapp\templates\datingapp\search_bar.html:15
+#: .\datingapp\templates\datingapp\search_bar.html:21
+msgid "All"
+msgstr "Tout"
+
+#: .\datingapp\templates\datingapp\search_bar.html:10
+#: .\datingapp\templates\datingapp\search_bar.html:16
+#: .\datingapp\templates\datingapp\search_bar.html:22
+msgid "Boys"
+msgstr "Garçons"
+
+#: .\datingapp\templates\datingapp\search_bar.html:11
+#: .\datingapp\templates\datingapp\search_bar.html:17
+#: .\datingapp\templates\datingapp\search_bar.html:23
+msgid "Girls"
+msgstr "Filles"
+
+#: .\datingapp\templates\datingapp\search_bar.html:37
+msgid "All boys"
+msgstr "Tous les garçons"
+
+#: .\datingapp\templates\datingapp\search_bar.html:39
+msgid "All girls"
+msgstr "Toutes les filles"
+
+#: .\datingapp\templates\datingapp\search_bar.html:41
+msgid "All users"
+msgstr "Tous les utilisateurs"
+
+#: .\frendate\settings.py:120
+msgid "English"
+msgstr "Anglais"
+
+#: .\frendate\settings.py:121
+msgid "French"
+msgstr ""
+
+#: .\userapp\templates\userapp\sign_in.html:47
 msgid "Enter the information you entered while registering."
 msgstr "Entrez les informations que vous avez fournies lors de l'inscription."
 
-#: .\userapp\templates\userapp\sign_in.html:54
+#: .\userapp\templates\userapp\sign_in.html:67
 #: .\userapp\templates\userapp\sign_up.html:62
 msgid "Sign In"
 msgstr "Se connecter"
 
-#: .\userapp\templates\userapp\sign_in.html:56
+#: .\userapp\templates\userapp\sign_in.html:70
 msgid "Don't have an account?"
 msgstr "Vous n'avez pas de compte ?"
 
-#: .\userapp\templates\userapp\sign_in.html:57
+#: .\userapp\templates\userapp\sign_in.html:72
 #: .\userapp\templates\userapp\sign_up.html:59
 msgid "Sign Up"
 msgstr "S'inscrire"
@@ -198,63 +289,3 @@ msgstr "Enregistrer les modifications"
 
 #~ msgid "Your chat is empty"
 #~ msgstr "Votre discussion est vide"
-
-#~ msgid "Chatting"
-#~ msgstr "En conversation"
-
-#~ msgid "Delete"
-#~ msgstr "Supprimer"
-
-#~ msgid "You haven't favorites"
-#~ msgstr "Vous n'avez pas de favoris"
-
-#~ msgid "Chat Now"
-#~ msgstr "Discuter maintenant"
-
-#~ msgid "Photos (Coming soon)"
-#~ msgstr "Photos (Bientôt disponible)"
-
-#~ msgid "Interests"
-#~ msgstr "Intérêts"
-
-#~ msgid "Coming soon"
-#~ msgstr "Bientôt disponible"
-
-#~ msgid "Match Predictor"
-#~ msgstr "Prédiction de compatibilité"
-
-#~ msgid "About"
-#~ msgstr "À propos de"
-
-#~ msgid "Physical Details"
-#~ msgstr "Détails physiques"
-
-#~ msgid "I'm looking for"
-#~ msgstr "Je recherche"
-
-#~ msgid "Current Goal"
-#~ msgstr "Objectif actuel"
-
-#~ msgid "Similar Users (coming soon)"
-#~ msgstr "Utilisateurs similaires (Bientôt disponible)"
-
-#~ msgid "Search..."
-#~ msgstr "Recherche..."
-
-#~ msgid "All"
-#~ msgstr "Tout"
-
-#~ msgid "Boys"
-#~ msgstr "Garçons"
-
-#~ msgid "Girls"
-#~ msgstr "Filles"
-
-#~ msgid "All boys"
-#~ msgstr "Tous les garçons"
-
-#~ msgid "All girls"
-#~ msgstr "Toutes les filles"
-
-#~ msgid "All users"
-#~ msgstr "Tous les utilisateurs"
