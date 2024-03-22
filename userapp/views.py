@@ -3,15 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.core.checks import messages
+from django.contrib import messages
 from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
 
-
+from datingapp.models import Favorite
 from .forms import UserUpdateForm, ProfileUpdateForm, SignUpStepOneForm, SignUpStepTwoForm, SignUpStepThreeForm, \
     PasswordResetForm
-from datingapp.models import Favorite
 from .models import Profile
 
 
@@ -218,19 +216,12 @@ def sign_up_step_three(request):
     return redirect('userapp:sign_up_step_two')
 
 
-def my_view(request):
-    # Your view logic here
-    messages.success(request, 'This is a success message!')
-    return redirect('some-view-name')
-
-
 def forget_password_action(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         user = User.objects.filter(username=username).first()
 
         if user:
-            # Corrected to use 'password_reset_form' URL name and pass 'user_id' correctly
             return redirect('userapp:password_reset_form', user_id=user.id)
         else:
             messages.error(request, 'Username does not exist')
@@ -259,5 +250,3 @@ def password_reset_form(request, user_id):
         form = PasswordResetForm()
 
     return render(request, 'userapp/password_reset_form.html', {'form': form})
-
-

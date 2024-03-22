@@ -51,8 +51,7 @@
                                             <button class="btn btn-dark btn-lg btn-block" type="submit">{% trans 'Sign In' %}</button>
                                         </div>
                                         <p class="mb-2" style="color: #393f81;">{% trans "Don't have an account?" %} <a href="{% url 'userapp:signup' %}" style="color: #393f81;">{% trans 'Sign Up' %}</a></p>
-                                        <p class="mb-0" style="color: #393f81;">Don't Remember your password?</p>
-                                        <p style="color: #393f81;"><a href="{% url 'userapp:forget_password_action' %}" style="color: #393f81;">{% trans 'Forgot Password?' %}</a></p>
+                                        <p class="mb-0" style="color: #393f81;">{% trans "Don't remember your password?" %} <a href="{% url 'userapp:forget_password_action' %}" style="color: #393f81;">{% trans 'Forgot Password?' %}</a></p>
                                     </form>
                                 </div>
                             </div>

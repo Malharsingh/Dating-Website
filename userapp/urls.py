@@ -15,8 +15,6 @@ urlpatterns = [
     path('forget_password/', views.forget_password_action, name='forget_password_action'),
     path('password-reset-form/<int:user_id>/', views.password_reset_form, name='password_reset_form'),
 
-
-
     # User pages
     path('user_account/', views.user_account, name='user_account'),
 ]
