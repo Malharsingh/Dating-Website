@@ -28,7 +28,8 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('', views.home, name='home'),
     path('', include('userapp.urls')),
-    path('dating/', include('datingapp.urls'))
+    path('dating/', include('datingapp.urls')),
+    path('chat/', include('chatapp.urls')),
 )
 
 if settings.DEBUG:
