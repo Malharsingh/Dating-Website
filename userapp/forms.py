@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.shortcuts import redirect, render
 
 from .models import Profile
 
@@ -35,3 +37,8 @@ class SignUpStepThreeForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['profile_pic', 'about']
+
+
+class PasswordResetForm(forms.Form):
+    new_password = forms.CharField(widget=forms.PasswordInput(), label="New Password")
+    confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Confirm Password")
