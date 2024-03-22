@@ -40,9 +40,10 @@ INSTALLED_APPS = [
 
     # Apps
     'userapp.apps.UserAppConfig',
+    'datingapp.apps.DatingAppConfig',
+    'chatapp.apps.ChatAppConfig',
     'crispy_forms',
     "crispy_bootstrap5",
-    "datingapp.apps.DatingAppConfig"
 ]
 
 MIDDLEWARE = [
