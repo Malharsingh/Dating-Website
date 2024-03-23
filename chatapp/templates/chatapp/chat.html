@@ -1,0 +1,29 @@
+{% extends "datingapp/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+<link rel="stylesheet" href="{% static 'styles/chat_app.css' %}">
+<link rel='stylesheet' href="{% static 'styles/reset.css' %}">
+</head><body>
+<div id="frame">
+	<div id="sidepanel">
+
+		<div id="contacts">
+			{% block contacts %}
+			{% endblock%}
+		</div>
+	</div>
+	<div class="content">
+		<div class="messages">
+			{% if not messages %}
+			<h6 class="alert alert-warning text-center">{% trans 'Select a chat to start messaging' %}</h6>
+			{% endif %}
+			{% block message %}
+			{% endblock %}
+		</div>
+	</div>
+</div>
+</div>
+</body></html>
+{% endblock %}
