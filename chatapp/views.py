@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, redirect
+
 from .models import Message
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datingapp.models import Favorite
 
@@ -9,7 +11,7 @@ from datingapp.models import Favorite
 class MessagesListView(LoginRequiredMixin, ListView):
     """ Inbox/messages/user list """
     model = Message
-    template_name = 'chat_app/messages_list.html'
+    template_name = 'chatapp/messages_list.html'
 
     # Contextual data to display the latest message
     def get_context_data(self, **kwargs):
@@ -35,15 +37,15 @@ class MessagesListView(LoginRequiredMixin, ListView):
 
 class InboxView(LoginRequiredMixin, DetailView):
     model = Message
-    template_name = 'chat_app/inbox.html'
+    template_name = 'chatapp/inbox.html'
     queryset = User.objects.all()
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(self.request, *args, **kwargs)
 
-    def get_object(self):
-        UserName = self.kwargs.get("username")
-        return get_object_or_404(User, username=UserName)
+    def get_object(self, *args, **kwargs):
+        username = self.kwargs.get("username")
+        return get_object_or_404(User, username=username)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -82,7 +84,7 @@ class InboxView(LoginRequiredMixin, DetailView):
             if request.method == 'POST':
                 if message:
                     Message.objects.create(sender=sender, recipient=recipient, message=message)
-            return redirect('chat_app:inbox', username=recipient.username)
+            return redirect('chatapp:inbox', username=recipient.username)
 
         else:
             # return render(request, 'auth/login.html')

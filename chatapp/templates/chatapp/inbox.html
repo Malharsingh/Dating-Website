@@ -1,10 +1,10 @@
-{% extends 'chat_app/messages_list.html' %}
+{% extends 'chatapp/messages_list.html' %}
 {% load static %}
 {% load i18n %}
 {% block message %}
 {% if messages %}
 <div class="contact-profile" style="font-weight: 500;">
-  <a href="{% url 'dating_app:partner_account' other_person.id %}">
+  <a href="{% url 'datingapp:partner_account' other_person.id %}">
   <img src="{{ other_person.profile.profile_pic.url }}" style="width: 40px; height: 40px; object-fit: cover; object-position: center;" alt="" />
   <p>{{ other_person.profile.first_name }} {{ other_person.profile.last_name }}</p>
   </a>
@@ -30,7 +30,7 @@
     {% endif %}
 {% endfor %}
 {% endif %}
-<form action="{% url 'chat_app:inbox' other_person.username %}" method="POST">
+<form action="{% url 'chatapp:inbox' other_person.username %}" method="POST">
   {% csrf_token %}
   <input type="hidden" name="recipient" value="{{ other_person.pk }}">
   <input type="hidden" name="user" value="{{ user.pk }}">
