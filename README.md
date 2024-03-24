@@ -16,23 +16,23 @@ Adding profiles to Favorites
 ```
 # Installation Steps
 
-1. Clone the repository
- 
+1. Clone the repository 
+cd Dating-Website
   
 2. Create Python virtual environment  
 python3 -m venv venv  
   
 3.Activate a Python virtual environment and install dependencies:  
 
-> (MacOS/Unix)  
+> (MacOS/Unix)  users execute the following commands: in the same sequence
 source venv/bin/activate  
-pip3 install -r req.txt
+pip3 install -r requirements.txt
   
-> (Windows)  
+> (Windows)  users execute the following commands: in the same sequence
 venv\Scripts\activate.bat  
-pip3 install -r req.txt  
+pip3 install -r requirements.txt  
   
-4.For first time you need to create a database, by running the command:  
+4.Create a database, by running the command:  
 python3 manage.py migrate  
     
 5.Run the server  
