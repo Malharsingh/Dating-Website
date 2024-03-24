@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-24 15:58-0400\n"
+"POT-Creation-Date: 2024-03-24 16:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: GYAN KARTHIK ABHISHEK SAKIBANDA <ABHISHEKSAKIBANDA@GMAIL."
 "COM>\n"
@@ -143,6 +143,8 @@ msgid "French"
 msgstr ""
 
 #: .\userapp\templates\userapp\forget_password.html:15
+#: .\userapp\templates\userapp\sign_in.html:45
+#: .\userapp\templates\userapp\sign_up.html:49
 #: .\userapp\templates\userapp\user_account.html:48
 msgid "Username"
 msgstr "Nom d'utilisateur"
@@ -178,11 +180,6 @@ msgstr "Mot de passe"
 #: .\userapp\templates\userapp\sign_in.html:38
 msgid "Enter the information you entered while registering."
 msgstr "Entrez les informations que vous avez fournies lors de l'inscription."
-
-#: .\userapp\templates\userapp\sign_in.html:45
-#: .\userapp\templates\userapp\sign_up.html:49
-msgid "Login"
-msgstr "Nom d'utilisateur"
 
 #: .\userapp\templates\userapp\sign_in.html:48
 #: .\userapp\templates\userapp\sign_up.html:53
