@@ -17,7 +17,7 @@ Adding profiles to Favorites
 # Installation Steps
 
 1. Clone the repository
-cd dating-web-app  
+ 
   
 2. Create Python virtual environment  
 python3 -m venv venv  
