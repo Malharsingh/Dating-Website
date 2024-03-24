@@ -42,10 +42,17 @@ def favorite_add(request, user_id):
 
     if not favorites.exists():
         Favorite.objects.create(user=request.user, saved=saved)
+        favorites_count = request.session.get('favorites_count', 0) + 1
+        request.session['favorites_count'] = favorites_count
     else:
         favorite = favorites.first()
         favorite.delete()
-    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+        favorites_count = request.session.get('favorites_count', 0)
+        if favorites_count > 0:
+            request.session['favorites_count'] = favorites_count - 1
+    response = HttpResponseRedirect(request.META['HTTP_REFERER'])
+    response.set_cookie('favorites_count', str(request.session.get('favorites_count', 0)))
+    return response
 
 
 @login_required
@@ -98,6 +105,14 @@ def random_card(request):
         random_card = random.sample(card_list, 1)
     else:
         random_card = None
-    return render(request, 'datingapp/random_card.html', {'random_card': random_card,
-                                                          'favorites': Favorite.objects.filter(
-                                                              user=request.user).order_by('-saved_date')})
+    # Initialize favorites and skips count in cookies if not already set
+    favorites_count = request.session.get('favorites_count', 0)
+    skips_count = request.session.get('skips_count', 0)
+    response = render(request, 'datingapp/random_card.html', {'random_card': random_card,
+                                                              'favorites': Favorite.objects.filter(
+                                                                  user=request.user).order_by(
+                                                                  '-saved_date'), 'favorites_count': favorites_count,
+                                                              'skips_count': skips_count})
+    response.set_cookie('favorites_count', str(favorites_count))
+    response.set_cookie('skips_count', str(skips_count))
+    return response
