@@ -25,6 +25,12 @@ def update_visit_count(request):
         request.session['date_visited'] = today
 
 
+def home(request):
+    """Home page"""
+    update_visit_count(request)
+    return render(request, template_name='userapp/landing_page.html')
+
+
 def signup(request):
     """User registration"""
     if request.user.is_authenticated:  # If the user is logged in, then he does not have access to the login form
@@ -91,7 +97,7 @@ def logout_user(request):
     """User logout"""
     if request.method == 'POST':
         logout(request)
-        return redirect('userapp:signin')
+        return redirect('home')
 
 
 @login_required

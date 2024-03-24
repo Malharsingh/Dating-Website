@@ -8,15 +8,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-22 16:17-0400\n"
+"POT-Creation-Date: 2024-03-24 16:41-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: GYAN KARTHIK ABHISHEK SAKIBANDA <ABHISHEKSAKIBANDA@GMAIL.COM>\n"
+"Last-Translator: GYAN KARTHIK ABHISHEK SAKIBANDA <ABHISHEKSAKIBANDA@GMAIL."
+"COM>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: French\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\chatapp\templates\chatapp\chat.html:20
+msgid "Select a chat to start messaging"
+msgstr "Sélectionnez un chat pour commencer à envoyer des messages"
+
+#: .\chatapp\templates\chatapp\messages_list.html:6
+msgid "Your chat is empty"
+msgstr "Votre discussion est vide"
 
 #: .\datingapp\templates\datingapp\base.html:57
 msgid "Signed in as"
@@ -125,15 +134,17 @@ msgstr "Toutes les filles"
 msgid "All users"
 msgstr "Tous les utilisateurs"
 
-#: .\frendate\settings.py:120
+#: .\frendate\settings.py:121
 msgid "English"
 msgstr "Anglais"
 
-#: .\frendate\settings.py:121
+#: .\frendate\settings.py:122
 msgid "French"
 msgstr ""
 
 #: .\userapp\templates\userapp\forget_password.html:15
+#: .\userapp\templates\userapp\sign_in.html:45
+#: .\userapp\templates\userapp\sign_up.html:49
 #: .\userapp\templates\userapp\user_account.html:48
 msgid "Username"
 msgstr "Nom d'utilisateur"
@@ -141,6 +152,18 @@ msgstr "Nom d'utilisateur"
 #: .\userapp\templates\userapp\forget_password.html:18
 msgid "Submit"
 msgstr "Submit"
+
+#: .\userapp\templates\userapp\landing_page.html:44
+msgid "Find Your Perfect Match"
+msgstr "Trouvez votre partenaire idéal"
+
+#: .\userapp\templates\userapp\landing_page.html:47
+msgid "Join our dating community today and meet amazing people."
+msgstr "Rejoignez notre communauté de rencontres aujourd'hui et rencontrez des personnes extraordinaires."
+
+#: .\userapp\templates\userapp\landing_page.html:52
+msgid "Get Started"
+msgstr "Commencer"
 
 #: .\userapp\templates\userapp\password_reset_form.html:12
 #, fuzzy
@@ -157,11 +180,6 @@ msgstr "Mot de passe"
 #: .\userapp\templates\userapp\sign_in.html:38
 msgid "Enter the information you entered while registering."
 msgstr "Entrez les informations que vous avez fournies lors de l'inscription."
-
-#: .\userapp\templates\userapp\sign_in.html:45
-#: .\userapp\templates\userapp\sign_up.html:49
-msgid "Login"
-msgstr "Nom d'utilisateur"
 
 #: .\userapp\templates\userapp\sign_in.html:48
 #: .\userapp\templates\userapp\sign_up.html:53
@@ -193,7 +211,7 @@ msgid "Forgot Password?"
 msgstr "Confirmer le mot de passe"
 
 #: .\userapp\templates\userapp\sign_up.html:38
-msgid "It's Never too late<br>to Find Match"
+msgid "It's Never too late<br>to Find a Match"
 msgstr "Il n'est jamais trop tard pour trouver une correspondance"
 
 #: .\userapp\templates\userapp\sign_up.html:56
@@ -315,9 +333,3 @@ msgstr "Enregistrer les modifications"
 
 #~ msgid "Don't Remember Your Password?"
 #~ msgstr "Vous ne vous souvenez plus de votre mot de passe?"
-
-#~ msgid "Select a chat to start messaging"
-#~ msgstr "Sélectionnez un chat pour commencer à envoyer des messages"
-
-#~ msgid "Your chat is empty"
-#~ msgstr "Votre discussion est vide"
