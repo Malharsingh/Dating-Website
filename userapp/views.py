@@ -1,9 +1,11 @@
+from datetime import date
+
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib import messages
 from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -13,11 +15,23 @@ from .forms import UserUpdateForm, ProfileUpdateForm, SignUpStepOneForm, SignUpS
 from .models import Profile
 
 
+def update_visit_count(request):
+    # Check if 'num_visits' key exists in session for the current date
+    today = date.today().isoformat()
+    if 'num_visits' in request.session and request.session['date_visited'] == today:
+        request.session['num_visits'] += 1
+    else:
+        request.session['num_visits'] = 1
+        request.session['date_visited'] = today
+
+
 def signup(request):
     """User registration"""
     if request.user.is_authenticated:  # If the user is logged in, then he does not have access to the login form
+        update_visit_count(request)
         return redirect('datingapp:dating')
     else:
+        update_visit_count(request)
         error_context = []
         if request.method == 'GET':
             return render(request, template_name='userapp/sign_up.html', context={'form': UserCreationForm})
@@ -53,8 +67,10 @@ def signup(request):
 def signin(request):
     """User Login"""
     if request.user.is_authenticated:  # If the user is logged in, then he does not have access to the login form
+        update_visit_count(request)
         return redirect('datingapp:dating')
     else:
+        update_visit_count(request)
         if request.method == 'GET':
             return render(request, template_name='userapp/sign_in.html',
                           context={'form': AuthenticationForm()})
@@ -242,11 +258,11 @@ def password_reset_form(request, user_id):
             if new_password == confirm_password:
                 user.set_password(new_password)
                 user.save()
-                messages.success(request, 'Your password has been successfully reset.')
+                messages.success(request, message='Your password has been successfully reset.')
                 return redirect('userapp:signin')  # Adjust as needed
             else:
-                messages.error(request, 'The passwords do not match.')
+                messages.error(request, message='The passwords do not match.')
     else:
         form = PasswordResetForm()
 
-    return render(request, 'userapp/password_reset_form.html', {'form': form})
+    return render(request, template_name='userapp/password_reset_form.html', context={'form': form})
