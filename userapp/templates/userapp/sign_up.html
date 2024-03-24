@@ -35,7 +35,7 @@
 					<div class="d-flex align-items-center mb-3 pb-1">
 					  <span class="h1 fw-bold mb-0"><img src="{% static 'userapp/logo.png' %}" style="height: 60px;" alt="Frendate"></span>
 					</div>
-					<h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">{% trans "It's Never too late<br>to Find Match" %}</h3>
+					<h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">{% trans "It's Never too late<br>to Find a Match" %}</h3>
 					{% if error_context %}
 			{% for error in error_context %}
                 <div class="alert alert-danger" role="alert">
@@ -46,7 +46,7 @@
 			{% endfor %}
             {% endif %}
 					<div class="form-outline mb-4">
-					  <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="{% trans 'Login' %}" />
+					  <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="{% trans 'Username' %}" />
 					</div>
   
 					<div class="form-outline mb-4">
