@@ -90,7 +90,7 @@ def get_pagination(request, profiles_list, objects_num):
 
     try:
         cards = paginator.page(page)
-    except(EmptyPage, InvalidPage):
+    except (EmptyPage, InvalidPage):
         cards = paginator.page(paginator.num_pages)
     page_range = paginator.get_elided_page_range(number=page)
 

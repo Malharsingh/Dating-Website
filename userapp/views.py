@@ -121,6 +121,9 @@ def user_account(request):
             elif not str(request.POST['age']).isnumeric():
                 return render(request, template_name='userapp/user_account.html',
                               context={'error': 'Incorrect age field'})
+            if len(request.POST['about']) < 50:
+                return render(request, template_name='userapp/user_account.html',
+                              context={'error': 'About field must be at least 50 characters'})
             else:
                 try:
                     u_form.save()
@@ -230,6 +233,9 @@ def sign_up_step_three(request):
             if not (request.POST['about']):
                 return render(request, template_name='userapp/sign_up_step_three.html',
                               context={'error': 'About field can\'t be empty'})
+            if len(request.POST['about']) < 50:
+                return render(request, template_name='userapp/sign_up_step_three.html',
+                              context={'error': 'About field must be at least 50 characters'})
             else:
                 try:
                     step_three_form.save()
