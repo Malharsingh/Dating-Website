@@ -260,12 +260,12 @@ def forget_password_action(request):
         user = User.objects.filter(username=username).first()
 
         if user:
-            return redirect('userapp:password_reset_form', user_id=user.id)
+            return redirect(to='userapp:password_reset_form', user_id=user.id)
         else:
-            messages.error(request, 'Username does not exist')
+            messages.error(request, message='Username does not exist')
             return redirect('userapp:forget_password_action')
 
-    return render(request, 'userapp/forget_password.html')
+    return render(request, template_name='userapp/forget_password.html')
 
 
 def password_reset_form(request, user_id):
