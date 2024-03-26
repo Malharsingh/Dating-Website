@@ -24,7 +24,7 @@ def dating(request):
             sex = ['M', 'F']
 
         profiles_list = Profile.objects.filter(
-            Q(first_name__icontains=query) | Q(last_name__icontains=query), sex__in=sex
+            Q(first_name__startswith=query) | Q(last_name__startswith=query), sex__in=sex
         ).exclude(id=request.user.id)
 
         context = get_pagination(request, profiles_list, 10)
