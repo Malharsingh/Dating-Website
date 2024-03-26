@@ -28,6 +28,8 @@ def update_visit_count(request):
 def home(request):
     """Home page"""
     update_visit_count(request)
+    if request.user.is_authenticated:
+        return redirect('datingapp:dating')
     return render(request, template_name='userapp/landing_page.html')
 
 
@@ -97,7 +99,10 @@ def logout_user(request):
     """User logout"""
     if request.method == 'POST':
         logout(request)
-        return redirect('home')
+        response = redirect('home')
+        response.delete_cookie('favorites_count')
+        response.delete_cookie('favorites')
+        return response
 
 
 @login_required
@@ -129,10 +134,12 @@ def user_account(request):
             u_form = UserUpdateForm(instance=request.user)
             p_form = ProfileUpdateForm(instance=request.user.profile)
 
+        favorites = Favorite.objects.filter(user=request.user)
         context = {
             'u_form': u_form,
             'p_form': p_form,
-            'favorites': Favorite.objects.filter(user=request.user).order_by('-saved_date')
+            'favorites': favorites.order_by('-saved_date'),
+            'favorites_count': favorites.count(),
         }
 
         return render(request, template_name='userapp/user_account.html', context=context)
@@ -152,6 +159,9 @@ def sign_up_step_one(request):
         if not (str(request.POST['first_name']).isalpha()):
             return render(request, template_name='userapp/sign_up_step_one.html',
                           context={'error': 'First name can\'t have numbers'})
+        if str(request.POST['first_name']).lower() == request.user.username:
+            return render(request, template_name='userapp/sign_up_step_one.html',
+                          context={'error': 'First name can\'t be the same as username'})
         elif not (request.POST['last_name']):
             return render(request, template_name='userapp/sign_up_step_one.html',
                           context={'error': 'Last name can\'t be empty'})

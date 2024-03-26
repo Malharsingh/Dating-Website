@@ -10,6 +10,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from userapp.models import Profile
 from .models import Favorite
 
+favorite_user = list()
+
 
 @login_required
 def dating(request):
@@ -39,11 +41,12 @@ def dating(request):
 def favorite_add(request, user_id):
     saved = User.objects.get(id=user_id)
     favorites = Favorite.objects.filter(user=request.user, saved=saved)
-
     if not favorites.exists():
         Favorite.objects.create(user=request.user, saved=saved)
         favorites_count = request.session.get('favorites_count', 0) + 1
         request.session['favorites_count'] = favorites_count
+        favorite_user.append(saved.id)
+        request.session['favorites'] = favorite_user
     else:
         favorite = favorites.first()
         favorite.delete()
@@ -52,6 +55,7 @@ def favorite_add(request, user_id):
             request.session['favorites_count'] = favorites_count - 1
     response = HttpResponseRedirect(request.META['HTTP_REFERER'])
     response.set_cookie('favorites_count', str(request.session.get('favorites_count', 0)))
+    response.set_cookie('favorites', request.session.get('favorites', 0))
     return response
 
 
@@ -105,6 +109,7 @@ def random_card(request):
         random_card = random.sample(card_list, 1)
     else:
         random_card = None
+
     # Initialize favorites and skips count in cookies if not already set
     favorites_count = request.session.get('favorites_count', 0)
     skips_count = request.session.get('skips_count', 0)
