@@ -113,34 +113,37 @@ def user_account(request):
         """Personal userapp account where he can edit userapp data"""
         if request.method == 'POST':
             u_form = UserUpdateForm(request.POST, instance=request.user)
-            p_form = ProfileUpdateForm(request.POST,
-                                       request.FILES,
-                                       instance=request.user.profile)
+            p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
 
-            city = request.POST['city']
-            city_name = city.split(', ')[0].strip() if ',' in city else city.split(' ')[0].strip()
+            city = request.POST.get('city')
+            city_name = city.split(',')[0].strip() if ',' in city else city.split(' ')[0].strip()
 
-            if int(request.POST['age']) < 18:
-                return render(request, template_name='userapp/user_account.html',
-                              context={'error': 'Your age must be at least 18 years old'})
-            elif not str(request.POST['age']).isnumeric():
-                return render(request, template_name='userapp/user_account.html',
-                              context={'error': 'Incorrect age field'})
-            elif len(request.POST['about']) < 50:
-                return render(request, template_name='userapp/user_account.html',
-                              context={'error': 'About field must be at least 50 characters'})
-            elif not City.objects.filter(name_ascii__iexact=city_name).exists():
-                return render(request, template_name='userapp/user_account.html',
-                              context={'error': 'Choose a correct city'})
-            else:
-                try:
-                    u_form.save()
-                    p_form.save()
-                    return redirect('userapp:user_account')  # Redirect to user profile page
-                except ValueError:
-                    return render(request, template_name='userapp/user_account.html',
-                                  context={'error': 'Files is too large, requirement is less than 2.5 MB'})
+            errors = []
 
+            if int(request.POST.get('age', 0)) < 18:
+                errors.append('Your age must be at least 18 years old')
+            elif not str(request.POST.get('age', '')).isnumeric():
+                errors.append('Incorrect age field')
+
+            if len(request.POST.get('about', '')) < 50:
+                errors.append('About field must be at least 50 characters')
+
+            if not City.objects.filter(name_ascii__iexact=city_name).exists():
+                errors.append('Choose a correct city')
+
+            if errors:
+                # Pass errors list to the template
+                return render(request, template_name='userapp/user_account.html',
+                              context={'errors': errors, 'u_form': u_form, 'p_form': p_form})
+
+            try:
+                u_form.save()
+                p_form.save()
+                return redirect('userapp:user_account')  # Redirect to user profile page
+            except ValueError:
+                errors.append('Files are too large, requirement is less than 2.5 MB')
+                return render(request, template_name='userapp/user_account.html',
+                              context={'errors': errors, 'u_form': u_form, 'p_form': p_form})
         else:
             u_form = UserUpdateForm(instance=request.user)
             p_form = ProfileUpdateForm(instance=request.user.profile)
@@ -161,36 +164,41 @@ def user_account(request):
 @login_required
 def sign_up_step_one(request):
     if request.method == 'POST':
-        step_one_form = SignUpStepOneForm(request.POST,
-                                          request.FILES,
-                                          instance=request.user.profile)
-        if not (request.POST['first_name']):
+        step_one_form = SignUpStepOneForm(request.POST, request.FILES, instance=request.user.profile)
+
+        errors = []
+
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        age = request.POST.get('age', '').strip()
+
+        if not first_name:
+            errors.append('First name can\'t be empty')
+        elif not first_name.isalpha():
+            errors.append('First name can\'t have numbers')
+
+        if first_name.lower() == request.user.username.lower():
+            errors.append('First name can\'t be the same as username')
+
+        if not last_name:
+            errors.append('Last name can\'t be empty')
+        elif not last_name.isalpha():
+            errors.append('Last name can\'t have numbers')
+
+        if not age:
+            errors.append('Age can\'t be empty')
+        elif not age.isnumeric():
+            errors.append('Incorrect age field')
+        elif int(age) < 18:
+            errors.append('Your age must be at least 18 years old')
+
+        if errors:
+            # Pass errors list to the template
             return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'First name can\'t be empty'})
-        if not (str(request.POST['first_name']).isalpha()):
-            return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'First name can\'t have numbers'})
-        if str(request.POST['first_name']).lower() == request.user.username:
-            return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'First name can\'t be the same as username'})
-        elif not (request.POST['last_name']):
-            return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'Last name can\'t be empty'})
-        if not (str(request.POST['last_name']).isalpha()):
-            return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'Last name can\'t have numbers'})
-        elif not (request.POST['age']):
-            return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'Age can\'t be empty'})
-        elif int(request.POST['age']) < 18:
-            return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'Your age must be at least 18 years old'})
-        elif not str(request.POST['age']).isnumeric():
-            return render(request, template_name='userapp/sign_up_step_one.html',
-                          context={'error': 'Incorrect age field'})
-        else:
-            step_one_form.save()
-            return redirect('userapp:sign_up_step_two')
+                          context={'errors': errors, 'step_one_form': step_one_form})
+
+        step_one_form.save()
+        return redirect('userapp:sign_up_step_two')
     else:
         step_one_form = SignUpStepOneForm(instance=request.user.profile)
 
@@ -205,27 +213,31 @@ def sign_up_step_two(request):
     profile = Profile.objects.get(pk=request.user.pk)
     if profile.first_name and profile.last_name and profile.age:
         if request.method == 'POST':
-            step_two_form = SignUpStepTwoForm(request.POST,
-                                              request.FILES,
-                                              instance=request.user.profile)
-            city = request.POST['city']
-            city_name = city.split(', ')[0].strip() if ',' in city else city.split(' ')[0].strip()
+            step_two_form = SignUpStepTwoForm(request.POST, request.FILES, instance=request.user.profile)
+
+            errors = []
+
+            city = request.POST.get('city', '').strip()
+            city_name = city.split(', ')[0].strip() if ', ' in city else city.split(' ')[0].strip()
 
             if not city:
-                return render(request, template_name='userapp/sign_up_step_two.html',
-                              context={'error': 'Location can\'t be empty'})
+                errors.append('Location can\'t be empty')
             elif not City.objects.filter(name_ascii__iexact=city_name).exists():
+                errors.append('Choose a correct city')
+
+            if request.POST.get('sex', '') not in ['M', 'F']:
+                errors.append('Choose correct sex field')
+
+            if request.POST.get('seeking', '') not in ['M', 'F']:
+                errors.append('Choose correct seeking field')
+
+            if errors:
+                # Pass errors list to the template
                 return render(request, template_name='userapp/sign_up_step_two.html',
-                              context={'error': 'Choose a correct city'})
-            elif request.POST['sex'] not in ['M', 'F']:
-                return render(request, template_name='userapp/sign_up_step_two.html',
-                              context={'error': 'Choose correct sex field'})
-            elif request.POST['seeking'] not in ['M', 'F']:
-                return render(request, template_name='userapp/sign_up_step_two.html',
-                              context={'error': 'Choose correct seeking field'})
-            else:
-                step_two_form.save()
-                return redirect('userapp:sign_up_step_three')
+                              context={'errors': errors, 'step_two_form': step_two_form})
+
+            step_two_form.save()
+            return redirect('userapp:sign_up_step_three')
         else:
             step_two_form = SignUpStepTwoForm(instance=request.user.profile)
 
@@ -241,22 +253,23 @@ def sign_up_step_three(request):
     profile = Profile.objects.get(pk=request.user.pk)
     if profile.city and profile.sex and profile.seeking:
         if request.method == 'POST':
-            step_three_form = SignUpStepThreeForm(request.POST,
-                                                  request.FILES,
-                                                  instance=request.user.profile)
-            if not (request.POST['about']):
-                return render(request, template_name='userapp/sign_up_step_three.html',
-                              context={'error': 'About field can\'t be empty'})
-            if len(request.POST['about']) < 50:
-                return render(request, template_name='userapp/sign_up_step_three.html',
-                              context={'error': 'About field must be at least 50 characters'})
-            else:
-                try:
-                    step_three_form.save()
-                    return redirect('datingapp:dating')
-                except ValueError:
-                    return render(request, template_name='userapp/sign_up_step_three.html',
-                                  context={'error': 'File is too large, requirement is less than 2.5 MB'})
+            step_three_form = SignUpStepThreeForm(request.POST, request.FILES, instance=request.user.profile)
+
+            errors = []
+
+            if len(request.POST.get('about', '').strip()) < 50:
+                errors.append('About field must be at least 50 characters')
+
+            if errors:
+                # Pass errors list to the template
+                return render(request, template_name='userapp/sign_up_step_three.html', context={'errors': errors, 'step_three_form': step_three_form})
+
+            try:
+                step_three_form.save()
+                return redirect('datingapp:dating')
+            except ValueError:
+                errors.append('File is too large, requirement is less than 2.5 MB')
+                return render(request, template_name='userapp/sign_up_step_three.html', context={'errors': errors, 'step_three_form': step_three_form})
 
         else:
             step_three_form = SignUpStepThreeForm(instance=request.user.profile)
