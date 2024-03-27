@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'datingapp.apps.DatingAppConfig',
     'chatapp.apps.ChatAppConfig',
     'crispy_forms',
-    "crispy_bootstrap5",
+    'crispy_bootstrap5',
+    'cities_light',
 ]
 
 MIDDLEWARE = [
@@ -145,6 +146,10 @@ LOGIN_URL = '/signin'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Crispy forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+# Cities light settings
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['fr', 'en']
+CITIES_LIGHT_INCLUDE_COUNTRIES = ['CA']

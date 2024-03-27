@@ -1,5 +1,6 @@
 from datetime import date
 
+from cities_light.models import City
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
@@ -115,15 +116,22 @@ def user_account(request):
             p_form = ProfileUpdateForm(request.POST,
                                        request.FILES,
                                        instance=request.user.profile)
+
+            city = request.POST['city']
+            city_name = city.split(', ')[0].strip() if ',' in city else city.split(' ')[0].strip()
+
             if int(request.POST['age']) < 18:
                 return render(request, template_name='userapp/user_account.html',
                               context={'error': 'Your age must be at least 18 years old'})
             elif not str(request.POST['age']).isnumeric():
                 return render(request, template_name='userapp/user_account.html',
                               context={'error': 'Incorrect age field'})
-            if len(request.POST['about']) < 50:
+            elif len(request.POST['about']) < 50:
                 return render(request, template_name='userapp/user_account.html',
                               context={'error': 'About field must be at least 50 characters'})
+            elif not City.objects.filter(name_ascii__iexact=city_name).exists():
+                return render(request, template_name='userapp/user_account.html',
+                              context={'error': 'Choose a correct city'})
             else:
                 try:
                     u_form.save()
@@ -200,9 +208,15 @@ def sign_up_step_two(request):
             step_two_form = SignUpStepTwoForm(request.POST,
                                               request.FILES,
                                               instance=request.user.profile)
-            if not (request.POST['city']):
+            city = request.POST['city']
+            city_name = city.split(', ')[0].strip() if ',' in city else city.split(' ')[0].strip()
+
+            if not city:
                 return render(request, template_name='userapp/sign_up_step_two.html',
                               context={'error': 'Location can\'t be empty'})
+            elif not City.objects.filter(name_ascii__iexact=city_name).exists():
+                return render(request, template_name='userapp/sign_up_step_two.html',
+                              context={'error': 'Choose a correct city'})
             elif request.POST['sex'] not in ['M', 'F']:
                 return render(request, template_name='userapp/sign_up_step_two.html',
                               context={'error': 'Choose correct sex field'})
