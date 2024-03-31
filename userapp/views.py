@@ -5,14 +5,13 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.shortcuts import render, redirect, get_object_or_404
 
 from datingapp.models import Favorite
 from .forms import UserUpdateForm, ProfileUpdateForm, SignUpStepOneForm, SignUpStepTwoForm, SignUpStepThreeForm, \
-    PasswordResetForm
+    PasswordResetForm, SignUpForm
 from .models import Profile
 
 
@@ -36,41 +35,25 @@ def home(request):
 
 def signup(request):
     """User registration"""
-    if request.user.is_authenticated:  # If the user is logged in, then he does not have access to the login form
-        update_visit_count(request)
+    if request.user.is_authenticated:
+        # If the user is already authenticated, redirect to another view (e.g., user dashboard)
         return redirect('datingapp:dating')
     else:
-        update_visit_count(request)
-        error_context = []
         if request.method == 'GET':
-            return render(request, template_name='userapp/sign_up.html', context={'form': UserCreationForm})
-        else:
-            if not (request.POST['username']):
-                error_context.append('Login can\'t be empty')
-            elif not (request.POST['password1']):
-                error_context.append('Password can\'t be empty')
-            elif not (request.POST['password2']):
-                error_context.append('Confirm Password can\'t be empty')
-            elif request.POST['password1'] != request.POST['password2']:
-                error_context.append('Password did not match')
-            elif len(request.POST['password1']) < 8:
-                error_context.append('Password less then 8 characters')
-            elif str(request.POST['username']).lower() in ['admin', 'аdmin', 'god', 'administrator',
-                                                           'аdministrator', 'аdministrаtor']:
-                error_context.append('This login can\'t be taken')
-            else:
+            return render(request, 'userapp/sign_up.html', {'form': SignUpForm()})
+        elif request.method == 'POST':
+            form = SignUpForm(request.POST)
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password1']
                 try:
-                    user = User.objects.create_user(username=request.POST['username'],
-                                                    password=request.POST['password1'])
-                    user.save()
+                    user = User.objects.create_user(username=username, password=password)
                     login(request, user)
                     return redirect('userapp:sign_up_step_one')
                 except IntegrityError:
-                    error_context.append('That username has already been taken')
-                    return render(request, template_name='userapp/sign_up.html',
-                                  context={'form': UserCreationForm(), 'error_context': error_context})
-            return render(request, template_name='userapp/sign_up.html',
-                          context={'form': UserCreationForm(), 'error_context': error_context})
+                    form.add_error('username', 'That username is already taken')
+            # If form is invalid or username already exists
+            return render(request, 'userapp/sign_up.html', {'form': form})
 
 
 def signin(request):
@@ -262,14 +245,16 @@ def sign_up_step_three(request):
 
             if errors:
                 # Pass errors list to the template
-                return render(request, template_name='userapp/sign_up_step_three.html', context={'errors': errors, 'step_three_form': step_three_form})
+                return render(request, template_name='userapp/sign_up_step_three.html',
+                              context={'errors': errors, 'step_three_form': step_three_form})
 
             try:
                 step_three_form.save()
                 return redirect('datingapp:dating')
             except ValueError:
                 errors.append('File is too large, requirement is less than 2.5 MB')
-                return render(request, template_name='userapp/sign_up_step_three.html', context={'errors': errors, 'step_three_form': step_three_form})
+                return render(request, template_name='userapp/sign_up_step_three.html',
+                              context={'errors': errors, 'step_three_form': step_three_form})
 
         else:
             step_three_form = SignUpStepThreeForm(instance=request.user.profile)
